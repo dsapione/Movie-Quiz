@@ -8,9 +8,10 @@ var questFive = document.querySelector("#five");
 var questSix = document.querySelector("#six");
 var questSeven = document.querySelector("#seven");
 var questEight = document.querySelector("#eight");
-
-var timerEl = document.getElementById('countdown');
-
+var timerEl = document.querySelector('.countdown');
+var highScore = document.querySelector(".highscore");
+var scoreEl = document.querySelector("#score-list");
+var highArray = JSON.parse(localStorage.getItem("highscore")) || []
 // var scoreArray = JSON.parse(localStorage.getItem("highscore")) || []
 // var score = 0
 
@@ -44,7 +45,7 @@ function playGame() {
 				setTimeout(function(e) {					
 					questOne.classList.add("hide");
 					questTwo.classList.remove("hide");
-				}, (1250));
+				}, (0500));
 			});
 
 			document.querySelector('.quest-two').addEventListener("click", function(e) {
@@ -62,7 +63,7 @@ function playGame() {
 				setTimeout(function(e) {
 					questTwo.classList.add("hide");					
 					questThree.classList.remove("hide");
-				}, (1250));
+				}, (0500));
 			});
 
 			document.querySelector('.quest-three').addEventListener("click", function(e) {
@@ -80,7 +81,7 @@ function playGame() {
 				setTimeout(function(e) {
 					questThree.classList.add("hide");					
 					questFour.classList.remove("hide");
-				}, (1250));
+				}, (0500));
 			});
 
 			document.querySelector('.quest-four').addEventListener("click", function(e) {
@@ -98,7 +99,7 @@ function playGame() {
 				setTimeout(function(e) {	
 					questFour.classList.add("hide");			
 					questFive.classList.remove("hide");
-				}, (1250));
+				}, (0500));
 			});
 
 			document.querySelector('.quest-five').addEventListener("click", function(e) {
@@ -116,7 +117,7 @@ function playGame() {
 				setTimeout(function(e) {
 					questFive.classList.add("hide");
 					questSix.classList.remove("hide");
-				}, (1250));
+				}, (0500));
 			});
 
 			document.querySelector('.quest-six').addEventListener("click", function(e) {
@@ -134,7 +135,7 @@ function playGame() {
 				setTimeout(function(e) {
 					questSix.classList.add("hide");					
 					questSeven.classList.remove("hide");
-				}, (1250));
+				}, (0500));
 			});
 
 			document.querySelector('.quest-seven').addEventListener("click", function(e) {
@@ -152,7 +153,7 @@ function playGame() {
 				setTimeout(function(e) {
 					questSeven.classList.add("hide");					
 					questEight.classList.remove("hide");
-				}, (1250));
+				}, (0500));
 			});
 
 			document.querySelector('.quest-eight').addEventListener("click", function(e) {
@@ -161,32 +162,47 @@ function playGame() {
 				
 				if (targetId === "correct"){
 					questEight.classList.add("right");
-					clearInterval(timer);		
+					var li = document.createElement("li");
+					li.textContent = timeLeft + 1;
+					scoreEl.appendChild(li);
+					clearInterval(timer);
+					highArray.push(timeLeft);
+					localStorage.setItem("highscore", JSON.stringify(highArray));		
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
+					var li = document.createElement("li");
+					li.textContent = timeLeft + 1;
+					scoreEl.appendChild(li);
+					timeLeft = timeLeft - 10;	
 					clearInterval(timer);
-					timeLeft = timeLeft - 10;
+					highArray.push(timeLeft);
+					localStorage.setItem("highscore", JSON.stringify(highArray));								
 				}	
 
-				setTimeout(function(e) {
-					endGame();
-				}, (1250));
+				setTimeout(function() {
+					highScore.classList.remove("hide");
+					timerEl.classList.add("hide");				
+					questEight.classList.add("hide");	
+				}, (0500));
 			});
 		}
 
-		else if (timeLeft = 0){
+		else if (timeLeft = 0){			
+			var li = document.createElement("li");
+			li.textContent = timeLeft + 1;
+			scoreEl.appendChild(li);
 			clearInterval(timer);
-			endGame()
-		}
-	}, 1000);
+			highArray.push(timeLeft);
+			localStorage.setItem("highscore", JSON.stringify(highArray));			
+		}		
+	}, 1000);	
 }
 
 // function endGame() {
-
 // 	var score = {
 // 		initials: 'abc',
-// 		score: 150
+// 		high: highArray
 // 	}
 // 	 scoreArray.push(score);
 // 	 localStorage.setItem("highscore", JSON.stringify(scoreArray));
@@ -198,7 +214,7 @@ function playGame() {
 // 	var scoreList = document.querySelector(".score-list")
 // 	scoreArray.forEach(score => {
 // 		var li = document.createElement("li");
-// 		li.textContent = score.initials + " " + score.score;
+// 		li.textContent = score.initials + " " + score.high;
 // 			scoreList.appendChild(li);
 // 	});
 // }

@@ -25,6 +25,7 @@ body {
 	padding: 15px;
 	text-align: justify;
 	line-height: 1.5;
+	margin-top: 40px;
 }
 
 header {
@@ -84,7 +85,7 @@ header {
 	background-color: rgb(16, 90, 62);
 }
 
-#countdown {
+.countdown {
 	color: blue;
 }
 
