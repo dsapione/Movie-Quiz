@@ -34,14 +34,17 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questOne.classList.add("right");
-					questTwo.classList.remove("hide");			
+					questOne.classList.add("right");		
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
-					questTwo.classList.remove("hide");
 					timeLeft = timeLeft - 10;
-				}	
+				}
+				
+				setTimeout(function(e) {					
+					questOne.classList.add("hide");
+					questTwo.classList.remove("hide");
+				}, (1250));
 			});
 
 			document.querySelector('.quest-two').addEventListener("click", function(e) {
@@ -49,14 +52,17 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questTwo.classList.add("right");
-					questThree.classList.remove("hide");			
+					questTwo.classList.add("right");			
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
-					questThree.classList.remove("hide");
 					timeLeft = timeLeft - 10;
 				}	
+
+				setTimeout(function(e) {
+					questTwo.classList.add("hide");					
+					questThree.classList.remove("hide");
+				}, (1250));
 			});
 
 			document.querySelector('.quest-three').addEventListener("click", function(e) {
@@ -64,14 +70,17 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questThree.classList.add("right");
-					questFour.classList.remove("hide");			
+					questThree.classList.add("right");			
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
-					questFour.classList.remove("hide");
 					timeLeft = timeLeft - 10;
 				}	
+
+				setTimeout(function(e) {
+					questThree.classList.add("hide");					
+					questFour.classList.remove("hide");
+				}, (1250));
 			});
 
 			document.querySelector('.quest-four').addEventListener("click", function(e) {
@@ -79,14 +88,17 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questFour.classList.add("right");
-					questFive.classList.remove("hide");		
+					questFour.classList.add("right");	
 				}
 				else if (targetId === "") {
-					target.setAttribute("id", "wrong");
-					questFive.classList.remove("hide");
+					target.setAttribute("id", "wrong");					
 					timeLeft = timeLeft - 10;
 				}	
+
+				setTimeout(function(e) {	
+					questFour.classList.add("hide");			
+					questFive.classList.remove("hide");
+				}, (1250));
 			});
 
 			document.querySelector('.quest-five').addEventListener("click", function(e) {
@@ -94,14 +106,17 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questFive.classList.add("right");
-					questSix.classList.remove("hide");			
+					questFive.classList.add("right");			
 				}
 				else if (targetId === "") {
-					target.setAttribute("id", "wrong");
-					questSix.classList.remove("hide");
+					target.setAttribute("id", "wrong");					
 					timeLeft = timeLeft - 10;
 				}	
+
+				setTimeout(function(e) {
+					questFive.classList.add("hide");
+					questSix.classList.remove("hide");
+				}, (1250));
 			});
 
 			document.querySelector('.quest-six').addEventListener("click", function(e) {
@@ -109,14 +124,17 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questSix.classList.add("right");
-					questSeven.classList.remove("hide");			
+					questSix.classList.add("right");		
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
-					questSeven.classList.remove("hide");
 					timeLeft = timeLeft - 10;
 				}	
+
+				setTimeout(function(e) {
+					questSix.classList.add("hide");					
+					questSeven.classList.remove("hide");
+				}, (1250));
 			});
 
 			document.querySelector('.quest-seven').addEventListener("click", function(e) {
@@ -124,14 +142,17 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questSeven.classList.add("right");
-					questEight.classList.remove("hide");			
+					questSeven.classList.add("right");		
 				}
 				else if (targetId === "") {
-					target.setAttribute("id", "wrong");
-					questEight.classList.remove("hide");
+					target.setAttribute("id", "wrong");					
 					timeLeft = timeLeft - 10;
 				}	
+
+				setTimeout(function(e) {
+					questSeven.classList.add("hide");					
+					questEight.classList.remove("hide");
+				}, (1250));
 			});
 
 			document.querySelector('.quest-eight').addEventListener("click", function(e) {
@@ -140,14 +161,23 @@ function playGame() {
 				
 				if (targetId === "correct"){
 					questEight.classList.add("right");
-					endGame();			
+					clearInterval(timer);		
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
+					clearInterval(timer);
 					timeLeft = timeLeft - 10;
-					endGame();
 				}	
+
+				setTimeout(function(e) {
+					endGame();
+				}, (1250));
 			});
+		}
+
+		else if (timeLeft = 0){
+			clearInterval(timer);
+			endGame()
 		}
 	}, 1000);
 }
