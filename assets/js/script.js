@@ -1,6 +1,6 @@
 var startBtn = document.querySelector(".start-btn");
 var startEl = document.querySelector(".start");
-var questOne = document.querySelector("#one")
+var questOne = document.querySelector("#one");
 var questTwo = document.querySelector("#two");
 var questThree = document.querySelector("#three");	
 var questFour = document.querySelector("#four");
@@ -43,7 +43,7 @@ function playGame() {
 					timeLeft = timeLeft - 10;
 				}
 				
-				setTimeout(function(e) {					
+				setTimeout(function() {					
 					questOne.classList.add("hide");
 					questTwo.classList.remove("hide");
 				}, (0500));
@@ -61,7 +61,7 @@ function playGame() {
 					timeLeft = timeLeft - 10;
 				}	
 
-				setTimeout(function(e) {
+				setTimeout(function() {
 					questTwo.classList.add("hide");					
 					questThree.classList.remove("hide");
 				}, (0500));
@@ -79,7 +79,7 @@ function playGame() {
 					timeLeft = timeLeft - 10;
 				}	
 
-				setTimeout(function(e) {
+				setTimeout(function() {
 					questThree.classList.add("hide");					
 					questFour.classList.remove("hide");
 				}, (0500));
@@ -97,7 +97,7 @@ function playGame() {
 					timeLeft = timeLeft - 10;
 				}	
 
-				setTimeout(function(e) {	
+				setTimeout(function() {	
 					questFour.classList.add("hide");			
 					questFive.classList.remove("hide");
 				}, (0500));
@@ -115,7 +115,7 @@ function playGame() {
 					timeLeft = timeLeft - 10;
 				}	
 
-				setTimeout(function(e) {
+				setTimeout(function() {
 					questFive.classList.add("hide");
 					questSix.classList.remove("hide");
 				}, (0500));
@@ -133,7 +133,7 @@ function playGame() {
 					timeLeft = timeLeft - 10;
 				}	
 
-				setTimeout(function(e) {
+				setTimeout(function() {
 					questSix.classList.add("hide");					
 					questSeven.classList.remove("hide");
 				}, (0500));
@@ -151,7 +151,7 @@ function playGame() {
 					timeLeft = timeLeft - 10;
 				}	
 
-				setTimeout(function(e) {
+				setTimeout(function() {
 					questSeven.classList.add("hide");					
 					questEight.classList.remove("hide");
 				}, (0500));
@@ -192,8 +192,8 @@ function playGame() {
 			questFour.classList.add("hide");
 			questFive.classList.add("hide");
 			questSix.classList.add("hide");
-			questSeven.classList.add("hide");				
-			questEight.classList.add("hide");	
+			questSeven.classList.add("hide");
+			questEight.classList.add("hide");			
 			clearInterval(timer);
 			timeLeftArray.push(0);
 			endGame();					
