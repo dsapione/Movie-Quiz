@@ -191,7 +191,7 @@ function playGame() {
 	}, 1000);	
 }
 
-function endGame() {
+function endGame(results) {
 	// debugger	
 	var results = {
 		score: timeLeftArray
@@ -199,7 +199,7 @@ function endGame() {
 	 scoreArray.push(results);
 	 localStorage.setItem("highscore", JSON.stringify(scoreArray));
 	 printScores();
-	 return results
+	 return results;
 }
 
 function printScores() {
