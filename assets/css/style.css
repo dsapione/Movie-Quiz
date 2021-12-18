@@ -86,7 +86,9 @@ header {
 }
 
 .countdown {
-	color: blue;
+	color: gray;
+	margin: 15px;
+	font-size: 18px;
 }
 
 .right #correct {

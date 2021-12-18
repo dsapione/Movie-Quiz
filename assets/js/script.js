@@ -11,9 +11,10 @@ var questEight = document.querySelector("#eight");
 var timerEl = document.querySelector('.countdown');
 var highScore = document.querySelector(".highscore");
 var scoreEl = document.querySelector("#score-list");
-var highArray = JSON.parse(localStorage.getItem("highscore")) || []
-// var scoreArray = JSON.parse(localStorage.getItem("highscore")) || []
+var timeLeftArray = []
+var scoreArray = JSON.parse(localStorage.getItem("highscore")) || []
 // var score = 0
+console.log(timeLeftArray)
 
 function startGame() {
 	startEl.classList.add("hide");
@@ -162,61 +163,51 @@ function playGame() {
 				
 				if (targetId === "correct"){
 					questEight.classList.add("right");
-					var li = document.createElement("li");
-					li.textContent = timeLeft + 1;
-					scoreEl.appendChild(li);
 					clearInterval(timer);
-					highArray.push(timeLeft);
-					localStorage.setItem("highscore", JSON.stringify(highArray));		
+					timeLeftArray.push(timeLeft);
+					endGame();					 		
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
-					var li = document.createElement("li");
-					li.textContent = timeLeft + 1;
-					scoreEl.appendChild(li);
 					timeLeft = timeLeft - 10;	
 					clearInterval(timer);
-					highArray.push(timeLeft);
-					localStorage.setItem("highscore", JSON.stringify(highArray));								
+					timeLeftArray.push(timeLeft);
+					endGame();										
 				}	
 
 				setTimeout(function() {
 					highScore.classList.remove("hide");
 					timerEl.classList.add("hide");				
-					questEight.classList.add("hide");	
+					questEight.classList.add("hide");											
 				}, (0500));
 			});
 		}
 
-		else if (timeLeft = 0){			
-			var li = document.createElement("li");
-			li.textContent = timeLeft + 1;
-			scoreEl.appendChild(li);
+		else if (timeLeft = 0){
+			timeLeftArray.push(timeLeft);
 			clearInterval(timer);
-			highArray.push(timeLeft);
-			localStorage.setItem("highscore", JSON.stringify(highArray));			
+			endGame();					
 		}		
 	}, 1000);	
 }
 
-// function endGame() {
-// 	var score = {
-// 		initials: 'abc',
-// 		high: highArray
-// 	}
-// 	 scoreArray.push(score);
-// 	 localStorage.setItem("highscore", JSON.stringify(scoreArray));
-// 	 printScores();
-// 	 return score;
-// }
+function endGame() {
+	// debugger	
+	var results = {
+		score: timeLeftArray
+	}
+	 scoreArray.push(results);
+	 localStorage.setItem("highscore", JSON.stringify(scoreArray));
+	 printScores();
+	 return results
+}
 
-// function printScores() {
-// 	var scoreList = document.querySelector(".score-list")
-// 	scoreArray.forEach(score => {
-// 		var li = document.createElement("li");
-// 		li.textContent = score.initials + " " + score.high;
-// 			scoreList.appendChild(li);
-// 	});
-// }
+function printScores() {
+	scoreArray.forEach(results => {
+		var li = document.createElement("li");
+		li.textContent = results.score;
+		scoreEl.appendChild(li);
+	});
+}
 
 startBtn.addEventListener("click", startGame);
