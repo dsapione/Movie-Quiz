@@ -1,5 +1,6 @@
 var startBtn = document.querySelector(".start-btn");
 var startEl = document.querySelector(".start");
+var quiz = document.querySelector(".quiz")
 var questOne = document.querySelector("#one");
 var questTwo = document.querySelector("#two");
 var questThree = document.querySelector("#three");	
@@ -170,6 +171,9 @@ function playGame() {
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
 					timeLeft = timeLeft - 10;
+					if (timeLeft < 0) {
+						timeLeft = 0
+					}
 					clearInterval(timer);
 					timeLeftArray.push(timeLeft);
 					endGame();										
@@ -184,16 +188,9 @@ function playGame() {
 		}
 
 		else if (timeLeft <= 0) {
+			quiz.classList.add("hide");
 			highScore.classList.remove("hide");
-			timerEl.classList.add("hide");
-			questOne.classList.add("hide");
-			questTwo.classList.add("hide");
-			questThree.classList.add("hide");
-			questFour.classList.add("hide");
-			questFive.classList.add("hide");
-			questSix.classList.add("hide");
-			questSeven.classList.add("hide");
-			questEight.classList.add("hide");			
+			timerEl.classList.add("hide");			
 			clearInterval(timer);
 			timeLeftArray.push(0);
 			endGame();					
