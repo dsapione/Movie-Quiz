@@ -12,9 +12,9 @@ var timerEl = document.querySelector('.countdown');
 var highScore = document.querySelector(".highscore");
 var scoreEl = document.querySelector("#score-list");
 var timeLeftArray = []
+var initialsArray = ''
 var scoreArray = JSON.parse(localStorage.getItem("highscore")) || []
-// var score = 0
-console.log(timeLeftArray)
+
 
 function startGame() {
 	startEl.classList.add("hide");
@@ -24,10 +24,10 @@ function startGame() {
 }
 
 function playGame() {
-	var timeLeft = 120;
+	var timeLeft = 60;
 
 	var timer = setInterval(function () {
-		if (timeLeft >= 0){
+		if (timeLeft > -1){
 			timerEl.textContent = timeLeft + ' seconds remaining';
 			timeLeft--;
 		
@@ -36,7 +36,7 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questOne.classList.add("right");		
+					target.setAttribute("id", "right");		
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
@@ -54,7 +54,7 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questTwo.classList.add("right");			
+					target.setAttribute("id", "right");			
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
@@ -72,7 +72,7 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questThree.classList.add("right");			
+					target.setAttribute("id", "right");			
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
@@ -90,7 +90,7 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questFour.classList.add("right");	
+					target.setAttribute("id", "right");
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");					
@@ -108,7 +108,7 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questFive.classList.add("right");			
+					target.setAttribute("id", "right");			
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");					
@@ -126,7 +126,7 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questSix.classList.add("right");		
+					target.setAttribute("id", "right");		
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
@@ -144,7 +144,7 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questSeven.classList.add("right");		
+					target.setAttribute("id", "right");		
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");					
@@ -162,14 +162,14 @@ function playGame() {
 				var targetId = e.target.id;
 				
 				if (targetId === "correct"){
-					questEight.classList.add("right");
-					clearInterval(timer);
+					target.setAttribute("id", "right");
+					clearInterval(timer);					
 					timeLeftArray.push(timeLeft);
 					endGame();					 		
 				}
 				else if (targetId === "") {
 					target.setAttribute("id", "wrong");
-					timeLeft = timeLeft - 10;	
+					timeLeft = timeLeft - 10;
 					clearInterval(timer);
 					timeLeftArray.push(timeLeft);
 					endGame();										
@@ -183,29 +183,43 @@ function playGame() {
 			});
 		}
 
-		else if (timeLeft = 0){
-			timeLeftArray.push(timeLeft);
+		else if (timeLeft <= 0) {
+			highScore.classList.remove("hide");
+			timerEl.classList.add("hide");
+			questOne.classList.add("hide");
+			questTwo.classList.add("hide");
+			questThree.classList.add("hide");
+			questFour.classList.add("hide");
+			questFive.classList.add("hide");
+			questSix.classList.add("hide");
+			questSeven.classList.add("hide");				
+			questEight.classList.add("hide");	
 			clearInterval(timer);
+			timeLeftArray.push(0);
 			endGame();					
 		}		
+
 	}, 1000);	
 }
 
 function endGame(results) {
-	// debugger	
-	var results = {
-		score: timeLeftArray
+	var initialsArray = (window.prompt('What are your initials?'));
+	if (initialsArray === "") {
+		var initialsArray = 'abc'
 	}
+	var results = {
+		initials: initialsArray,
+		score: timeLeftArray
+	}	
 	 scoreArray.push(results);
 	 localStorage.setItem("highscore", JSON.stringify(scoreArray));
 	 printScores();
-	 return results;
 }
 
 function printScores() {
 	scoreArray.forEach(results => {
 		var li = document.createElement("li");
-		li.textContent = results.score;
+		li.textContent = results.initials + " " + results.score;
 		scoreEl.appendChild(li);
 	});
 }

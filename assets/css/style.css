@@ -52,6 +52,7 @@ header {
 .start-btn:hover {
 	box-shadow: none;
 	background-color: rgb(16, 90, 62);
+	cursor: pointer;
 }
 .quest {
 	max-width: 700px;
@@ -83,15 +84,35 @@ header {
 .quest ol li:hover {
 	box-shadow: none;
 	background-color: rgb(16, 90, 62);
+	cursor: pointer;
 }
 
 .countdown {
 	color: gray;
-	margin: 15px;
+	padding: 15px;
 	font-size: 18px;
 }
 
-.right #correct {
+.highscore {
+	max-width: 200px;
+  margin: auto;
+	background-color: gray;
+	border-radius: 8px;
+}
+
+.highscore p{
+	font-size: 25px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.highscore ol li {
+	font-size: 20px;
+	line-height: 1.5;
+}
+
+#right {
 	color: green;
 }
 
