@@ -98,6 +98,7 @@ header {
   margin: auto;
 	background-color: gray;
 	border-radius: 8px;
+	margin-top: 20px;
 }
 
 .highscore p{
@@ -107,7 +108,7 @@ header {
 	text-align: center;
 }
 
-.highscore ol li {
+.highscore ol li {	
 	font-size: 20px;
 	line-height: 1.5;
 }
